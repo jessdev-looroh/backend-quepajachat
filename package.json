@@ -4,8 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "copyfiles -u 1 src/public/*.html src/public/*.css src/.env dist && tsc",
     "start": "node dist/",
+    "build-dev": "copyfiles -u 1 src/public/*.html src/public/*.css src/.env dist && tsc",
     "start-dev": "nodemon dist/"
   },
   "dependencies": {
