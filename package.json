@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "build": "copyfiles -u 1 src/public/*.html src/public/*.css src/.env dist && tsc",
-    "start": "copyfiles -u 1 src/public/*.html src/public/*.css src/.env dist && tsc && node dist/",
+    "start": "node dist/",
     "start-dev": "nodemon dist/"
   },
   "dependencies": {
