@@ -23,6 +23,10 @@
       socket.on("enviarMensaje", (data) => {
         console.log(data);
       });
+      socket.on("getBandsList", (bandas) => {
+        console.clear();
+        console.table(bandas);
+      });
     </script>
   </body>
 </html>
