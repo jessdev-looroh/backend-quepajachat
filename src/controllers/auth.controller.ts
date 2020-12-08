@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import Usuario from "../models/usuario.model";
 import bcryptjs from "bcryptjs";
-import generarJWT from "../helpers/jwt";
+import jwtHelper from "../helpers/jwt";
 // import Usuario from "../models/usuario.model";
 
 class LoginController {
@@ -32,7 +32,7 @@ class LoginController {
           err,
         });
       }
-      const token = await generarJWT(userNew.id);
+      const token = await jwtHelper.generarJWT(userNew.id);
       res.status(201).json({
         exito: true,
         token,
@@ -62,7 +62,7 @@ class LoginController {
         });
       }
       if (bcryptjs.compareSync(password, usuarioDB.password)) {
-        const token = await generarJWT(usuarioDB.id);
+        const token = await jwtHelper.generarJWT(usuarioDB.id);
         usuarioDB.online = true;
         await usuarioDB.save();
         return res.json({
@@ -83,7 +83,7 @@ class LoginController {
 
   async renewToken(req: any, res: Response) {
     const uid = req.uid;
-    const token = await generarJWT(uid);
+    const token = await jwtHelper.generarJWT(uid);
 
     Usuario.findById(uid, (err: any, usuarioDB: any) => {
       if (err) {
@@ -98,9 +98,9 @@ class LoginController {
           err: {
             message: "No existe un usuario con este UID",
           },
-        });
+        });  
       }
-      res.json({ exito: true, usuarioDB, token });
+      res.json({ exito: true, usuario:usuarioDB, token });
     });
   }
 }

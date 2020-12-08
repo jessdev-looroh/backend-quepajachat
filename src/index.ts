@@ -4,9 +4,11 @@ import dotenv = require("dotenv");
 import http = require("http");
 import dbConnection from "./database/config";
 import rutas from "./routes/routes";
+import jwtHelper from "./helpers/jwt";
 //CONFIGURACION DE LA RUTA DE LAS VARIABLES DE ENTORNO
 let rutaConfig = path.resolve(__dirname, "./.env");
 dotenv.config({ path: rutaConfig });
+
 
 //DB CONFIG
 dbConnection();

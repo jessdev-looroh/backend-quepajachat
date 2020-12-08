@@ -43,7 +43,7 @@ class LoginController {
                         err,
                     });
                 }
-                const token = yield jwt_1.default(userNew.id);
+                const token = yield jwt_1.default.generarJWT(userNew.id);
                 res.status(201).json({
                     exito: true,
                     token,
@@ -71,7 +71,7 @@ class LoginController {
                 });
             }
             if (bcryptjs_1.default.compareSync(password, usuarioDB.password)) {
-                const token = yield jwt_1.default(usuarioDB.id);
+                const token = yield jwt_1.default.generarJWT(usuarioDB.id);
                 usuarioDB.online = true;
                 yield usuarioDB.save();
                 return res.json({
@@ -93,7 +93,7 @@ class LoginController {
     renewToken(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const uid = req.uid;
-            const token = yield jwt_1.default(uid);
+            const token = yield jwt_1.default.generarJWT(uid);
             usuario_model_1.default.findById(uid, (err, usuarioDB) => {
                 if (err) {
                     return res.status(500).json({
@@ -109,7 +109,7 @@ class LoginController {
                         },
                     });
                 }
-                res.json({ exito: true, usuarioDB, token });
+                res.json({ exito: true, usuario: usuarioDB, token });
             });
         });
     }
